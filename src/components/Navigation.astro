@@ -1,0 +1,110 @@
+---
+import DarkThemeButton from "./react/DarkThemeButton";
+
+interface NavItem {
+  label: string;
+  route: string;
+}
+
+const navItems = [
+  {
+    label: "Sobre nosotros",
+    route: "#sobre-nosotros",
+  },
+  {
+    label: "Solicitar préstamo",
+    route: "#solicitar-prestamo",
+  },
+  {
+    label: "Compra y venta de vehículos",
+    route: "#compra-venta-vehiculos",
+  },
+] as Array<NavItem>;
+---
+
+<nav
+  class="py-4 px-4 lg:px-32 bg-gray-50 dark:bg-gray-900 border-2 dark:border-gray-900 border-gray-50 border-b-gray-200"
+>
+  <div>
+    <div class="relative flex h-16 items-center justify-between">
+      <div class="flex flex-1 items-center justify-between">
+        <p
+          class="flex text-sm sm:text-md md:text-2xl flex-shrink-0 items-center"
+        >
+          INVERSIONES P&P <br class="sm:hidden" /> MARTE E.I.R.L
+        </p>
+        <div class="hidden sm:ml-6 sm:block">
+          <div class="flex space-x-4">
+            {
+              navItems.map((item) => (
+                <a
+                  href={item.route}
+                  class="hover:text-blue-800 dark:hover:text-blue-400 rounded-md px-3 py-2 text-sm font-medium"
+                  aria-current="page"
+                >
+                  {item.label}
+                </a>
+              ))
+            }
+            <div class="px-3 py-2 hover:text-blue-800 dark:hover:text-blue-400">
+              <DarkThemeButton client:visible />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="absolute inset-y-0 right-0 flex items-center sm:hidden">
+        <DarkThemeButton client:visible />
+        <!-- Mobile menu button-->
+        <button
+          type="button"
+          aria-controls="mobile-menu-btn"
+          aria-expanded="false"
+          class:list={[
+            "ml-2 mobile-menu-btn group relative flex h-[26px] flex-col items-center rounded-md justify-between lg:hidden",
+          ]}
+        >
+          <svg
+            class="block h-12 w-12"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Mobile menu, show/hide based on menu state. -->
+  <div class="mobile-menu hidden">
+    <div class="space-y-1 px-2 pb-3 pt-2 text-right">
+      {
+        navItems.map((item) => (
+          <>
+            <a
+              href={item.route}
+              class="hover:text-blue-800 dark:hover:text-blue-400 block rounded-md px-3 py-2 text-base"
+            >
+              {item.label}
+            </a>
+          </>
+        ))
+      }
+    </div>
+  </div>
+</nav>
+<script>
+  import { $ } from "../lib/dom-selector";
+
+  const button = $(".mobile-menu-btn");
+  const menu = $(".mobile-menu");
+
+  button?.addEventListener("click", () => {
+    menu.classList.toggle("hidden");
+  });
+</script>
