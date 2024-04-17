@@ -6,7 +6,6 @@ const DarkThemeButton = () => {
   useEffect(() => {
     // Check local storage for theme preference on initial load
     const storedTheme = localStorage.getItem("darkTheme");
-    console.log("storedTheme", storedTheme);
     setDarkTheme(storedTheme === "true");
   }, []);
 

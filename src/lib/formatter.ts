@@ -1,4 +1,4 @@
-export const parseNumberWithCommas = (numberString: string) => {
+export const parseWithCommas = (numberString: string) => {
   let result = "";
   let count = 0;
 
@@ -11,4 +11,9 @@ export const parseNumberWithCommas = (numberString: string) => {
   }
 
   return result;
+};
+
+export const parseCurrency = (currencyString: string) => {
+  const currencyStringWithCommas = parseWithCommas(currencyString);
+  return "RD$" + " " + currencyStringWithCommas;
 };

@@ -9,15 +9,15 @@ interface NavItem {
 const navItems = [
   {
     label: "Sobre nosotros",
-    route: "#sobre-nosotros",
+    route: "/landing-2p-marte/#sobre-nosotros",
   },
   {
     label: "Solicitar préstamo",
-    route: "#solicitar-prestamo",
+    route: "/landing-2p-marte/loan-request",
   },
   {
     label: "Compra y venta de vehículos",
-    route: "#compra-venta-vehiculos",
+    route: "/landing-2p-marte/vehicle-request",
   },
 ] as Array<NavItem>;
 ---
@@ -28,11 +28,12 @@ const navItems = [
   <div>
     <div class="relative flex h-16 items-center justify-between">
       <div class="flex flex-1 items-center justify-between">
-        <p
+        <a
+          href="/landing-2p-marte/"
           class="flex text-sm sm:text-md md:text-2xl flex-shrink-0 items-center"
         >
           INVERSIONES P&P <br class="sm:hidden" /> MARTE E.I.R.L
-        </p>
+        </a>
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
             {

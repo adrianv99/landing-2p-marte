@@ -2,20 +2,13 @@
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import BusinessInfo from "../components/BusinessInfo.astro";
-import LoanPackages from "../components/LoanPackages.astro";
 import ContactWithUs from "../components/ContactWithUs.astro";
-import VehicleManagement from "../components/VehicleManagement.astro";
-import '../styles/index.css'
+import VehicleBanner from "../components/VehicleBanner.astro";
 ---
 
 <Layout title="INVERSIONES 2P MARTE">
   <Hero />
   <BusinessInfo />
-  <div class="pt-20">
-    <LoanPackages />
-  </div>
-  <VehicleManagement />
-  <div class="py-20">
-    <ContactWithUs />
-  </div>
+  <VehicleBanner />
+  <ContactWithUs />
 </Layout>

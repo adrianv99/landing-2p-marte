@@ -21,10 +21,9 @@
 
 <script>
   import { $ } from "../lib/dom-selector";
-  import { openWhatsappMessageLink } from "../lib/whatsapp-link";
-  import { parseNumberWithCommas } from "../lib/formatter";
+  import { parseCurrency } from "../lib/formatter";
 
-  let loan = "RD$ 10,000";
+  let loan = "10000";
 
   document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".inputRange").forEach(function (element) {
@@ -49,8 +48,8 @@
           fillPercent +
           "%)";
 
-        loan = "RD$" + " " + parseNumberWithCommas(val.toString());
-        output.textContent = loan;
+        loan = val.toString();
+        output.textContent = parseCurrency(loan);
       }
 
       input.addEventListener("input", handleInput);
@@ -62,7 +61,7 @@
 
   const button = $(".submit-btn");
   button?.addEventListener("click", () => {
-    const message = "Hola, me gustaría solicitar un préstamo de " + loan;
-    openWhatsappMessageLink(message);
+    const url = "/landing-2p-marte/loan-request?loan=" + loan;
+    window.location.assign(url);
   });
 </script>

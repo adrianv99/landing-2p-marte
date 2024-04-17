@@ -1,26 +1,24 @@
-import { useState } from "react";
-import { brands, categories, transactionTypes } from "../../const/vehicle";
+import { useState, useEffect } from "react";
 import { openWhatsappMessageLink } from "../../lib/whatsapp-link";
 
-const VehicleForm = () => {
+const LoanForm = () => {
+  useEffect(() => {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    if (params?.loan) {
+      setLoan(params?.loan);
+    }
+  }, []);
+
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [occupation, setOccupation] = useState("");
   const [income, setIncome] = useState("");
+  const [loan, setLoan] = useState("");
   const [termsAccepted, setTermsAccepted] = useState(false);
-  const [transactionType, setTransactionType] = useState(transactionTypes[0]);
-  const [category, setCategory] = useState(categories[0]);
-  const [brand, setBrand] = useState(brands[0]);
-  const [brandsToShow, setBrandsToShow] = useState(brands);
-
-  const handleCategoryChange = (event) => {
-    const value = event.target.value;
-    setCategory(value);
-    setBrandsToShow(brands.filter((brand) => brand.categories.includes(value)));
-  };
 
   const generateMessage = () => {
-    let message = "Solicitud de vehículo 🚗";
+    let message = "Solicitud préstamo";
     message += "\n";
     message += "----------------------------";
     message += "\n";
@@ -33,18 +31,13 @@ const VehicleForm = () => {
       message += "Ocupación: " + occupation;
     }
 
-
     if (income) {
       message += "\n";
       message += "Ingresos: RD$" + income;
     }
 
     message += "\n";
-    message += "Tipo de transacción: " + transactionType;
-    message += "\n";
-    message += "Tipo de vehículo: " + category;
-    message += "\n";
-    message += "Marca: " + brand.name;
+    message += "Cantidad del préstamo: RD$" + loan;
 
     return message;
   };
@@ -59,6 +52,11 @@ const VehicleForm = () => {
 
     if (!phone) {
       alert("Debe ingresar su número de teléfono.");
+      return false;
+    }
+
+    if (!loan) {
+      alert("Debe ingresar la cantidad a solicitar.");
       return false;
     }
 
@@ -134,55 +132,18 @@ const VehicleForm = () => {
         </div>
       </div>
       <div className="sm:col-span-6">
-        <label htmlFor="transactionType" className="block text-md">
-          Tipo de transacción <span className="text-red-500">*</span>
+        <label htmlFor="income" className="block text-md">
+          Cantidad a solicitar (RD$) <span className="text-red-500">*</span>
         </label>
         <div className="mt-2">
-          <select
-            id="transactionType"
-            value={transactionType}
-            onChange={(event) => setTransactionType(event.target.value)}
-            placeholder="Indicanos que tipo de trámite deseas"
+          <input
+            id="income"
+            value={loan}
+            type="number"
+            onChange={(event) => setLoan(event.target.value)}
+            placeholder="Indicanos cuanto dinero necesitas..."
             className="block appearance-none w-full rounded-md border-0 px-3 py-5 text-gray-600 dark:text-gray-900 shadow-lg"
-          >
-            {transactionTypes.map((type) => (
-              <option key={type}>{type}</option>
-            ))}
-          </select>
-        </div>
-      </div>
-      <div className="sm:col-span-6">
-        <label htmlFor="category" className="block text-md">
-          Tipo de vehículo <span className="text-red-500">*</span>
-        </label>
-        <div className="mt-2">
-          <select
-            id="category"
-            value={category}
-            onChange={handleCategoryChange}
-            className="block appearance-none w-full rounded-md border-0 px-3 py-5 text-gray-600 dark:text-gray-900 shadow-lg"
-          >
-            {categories.map((category) => (
-              <option key={category}>{category}</option>
-            ))}
-          </select>
-        </div>
-      </div>
-      <div className="sm:col-span-6">
-        <label htmlFor="brand" className="block text-md">
-          Marca <span className="text-red-500">*</span>
-        </label>
-        <div className="mt-2">
-          <select
-            id="brand"
-            value={brand}
-            onChange={(event) => setBrand(event.target.value)}
-            className="block appearance-none w-full rounded-md border-0 px-3 py-5 text-gray-600 dark:text-gray-900 shadow-lg"
-          >
-            {brandsToShow.map((brand) => (
-              <option key={brand.name}>{brand.name}</option>
-            ))}
-          </select>
+          ></input>
         </div>
       </div>
       <div className="sm:col-span-12 mt-3">
@@ -200,11 +161,17 @@ const VehicleForm = () => {
             className="block cursor-pointer text-md ml-3"
           >
             Acepto los
-            <a href="/landing-2p-marte/policies#terms-and-conditions" className="underline px-1">
+            <a
+              href="/landing-2p-marte/policies#terms-and-conditions"
+              className="underline px-1"
+            >
               términos y condiciones
             </a>
             <span>y</span>
-            <a href="/landing-2p-marte/policies#privacy" className="underline px-1">
+            <a
+              href="/landing-2p-marte/policies#privacy"
+              className="underline px-1"
+            >
               las políticas de privacidad.{" "}
             </a>
           </label>
@@ -219,4 +186,4 @@ const VehicleForm = () => {
   );
 };
 
-export default VehicleForm;
+export default LoanForm;
