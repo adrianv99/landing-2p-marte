@@ -162,14 +162,14 @@ const LoanForm = () => {
           >
             Acepto los
             <a
-              href="/landing-2p-marte/policies#terms-and-conditions"
+              href="/policies#terms-and-conditions"
               className="underline px-1"
             >
               términos y condiciones
             </a>
             <span>y</span>
             <a
-              href="/landing-2p-marte/policies#privacy"
+              href="/policies#privacy"
               className="underline px-1"
             >
               las políticas de privacidad.{" "}
