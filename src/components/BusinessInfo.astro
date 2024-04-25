@@ -6,7 +6,7 @@ import { address, phone } from "../const/business";
   id="sobre-nosotros"
   class="md:flex items-center justify-center md:justify-between md:px-32 md:pt-20 p-5 pt-10"
 >
-  <img src="/coins.png" class="img-element md:mt-10 mt-10" alt="coins" />
+  <img src="/coins.png" class="coins-img md:mt-10 mt-10" alt="coins" />
   <div class="md:text-right text-left">
     <h1 class="text-3xl">Sobre nosotros</h1>
     <p class="text-xl mt-4">
@@ -47,12 +47,25 @@ import { address, phone } from "../const/business";
       de tus datos personales.
     </div>
   </div>
-  <img src="/money.png" class="img-element md:mt-10 mt-10" alt="money" />
+  <img
+    src="/money.jpeg"
+    class="shadow-lg md:ml-5 money-img rounded md:mt-10 mt-10"
+    alt="money"
+  />
 </section>
 
 <style>
-  .img-element {
+  .coins-img {
     height: 300px;
     object-fit: contain;
+  }
+
+  .money-img {
+    width: 400px;
+    height: 325px;
+    @media (max-width: 420px) {
+      width: 100%;
+      height: 100%;
+    }
   }
 </style>
